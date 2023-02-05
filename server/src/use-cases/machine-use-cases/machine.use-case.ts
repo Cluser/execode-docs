@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IDataServices } from 'src/core/abstracts';
-import { CreateLineDto, UpdateMachineDto } from 'src/core/dtos';
+import { CreateMachineDto, UpdateMachineDto } from 'src/core/dtos';
 import { Machine } from '@prisma/client';
 import { MachineFactoryService } from './machine-factory.use-case';
 
@@ -17,8 +17,8 @@ export class MachineUseCases {
     return this.dataServices.machines.get(id);
   }
 
-  createMachine(createLineDto: CreateLineDto): Promise<Machine> {
-    const machine = this.machineFactoryService.createNewMachine(createLineDto);
+  createMachine(createMachineDto: CreateMachineDto): Promise<Machine> {
+    const machine = this.machineFactoryService.createNewMachine(createMachineDto);
     return this.dataServices.machines.create(machine);
   }
 

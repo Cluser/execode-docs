@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Machine } from '@prisma/client';
-import { CreateLineDto, UpdateLineDto } from 'src/core/dtos';
+import { Documentation } from '@prisma/client';
+import { CreateDocumentationDto, UpdateDocumentationDto } from 'src/core/dtos';
 import { DocumentationUseCases } from 'src/use-cases';
 
 @ApiTags("DocumentationController")
@@ -10,27 +10,27 @@ export class DocumentationController {
   constructor(private documentationUseCases: DocumentationUseCases) {}
 
   @Get("getDocumentations")
-  getDocumentations(): Promise<Machine[]> {
+  getDocumentations(): Promise<Documentation[]> {
     return this.documentationUseCases.getAllDocumentations()
   }
 
   @Get("getDocumentationById")
-  getDocumentationById(@Query('id') id: number): Promise<Machine> {
+  getDocumentationById(@Query('id') id: number): Promise<Documentation> {
     return this.documentationUseCases.getDocumentationById(id)
   }
 
   @Post("createDocumentation")
-  createDocumentation(@Body() createLineDto: CreateLineDto): Promise<Machine> {
-    return this.documentationUseCases.createDocumentation(createLineDto)
+  createDocumentation(@Body() createDocumentationDto: CreateDocumentationDto): Promise<Documentation> {
+    return this.documentationUseCases.createDocumentation(createDocumentationDto)
   }
 
   @Put("updateDocumentation")
-  updateDocumentation(@Query('id') id: number, @Body() updarteLineDto: UpdateLineDto): Promise<Machine> {
-    return this.documentationUseCases.updateDocumentation(id, updarteLineDto)
+  updateDocumentation(@Query('id') id: number, @Body() updateDocumentationDto: UpdateDocumentationDto): Promise<Documentation> {
+    return this.documentationUseCases.updateDocumentation(id, updateDocumentationDto)
   }
 
   @Delete("deleteDocumentation")
-  async deleteDocumentation(@Query('id') id: number): Promise<Machine> {
+  async deleteDocumentation(@Query('id') id: number): Promise<Documentation> {
     try {
       return await this.documentationUseCases.deleteDocumentationById(id)
     } catch (error) { 

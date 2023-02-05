@@ -7,7 +7,9 @@ export class DocumentationFactoryService {
   createNewDocumentation(createDocumentationDto: CreateDocumentationDto) {
     const newDocumentation: Documentation = {
       id: undefined,
-      name: createDocumentationDto.name
+      name: createDocumentationDto.name,
+      categoryId: createDocumentationDto.categoryId,
+      machineId: createDocumentationDto.machineId
     };
 
     return newDocumentation;

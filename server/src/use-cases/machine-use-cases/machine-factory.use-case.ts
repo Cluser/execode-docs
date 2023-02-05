@@ -9,7 +9,8 @@ export class MachineFactoryService {
   createNewMachine(createMachineDto: CreateMachineDto) {
     const newMachine: Machine = {
       id: undefined,
-      name: createMachineDto.name
+      name: createMachineDto.name,
+      lineId: createMachineDto.lineId
     };
 
     return newMachine;

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Machine } from '@prisma/client';
-import { CreateLineDto, UpdateLineDto } from 'src/core/dtos';
+import { CreateMachineDto, UpdateLineDto } from 'src/core/dtos';
 import { MachineUseCases } from 'src/use-cases/machine-use-cases/machine.use-case';
 
 @ApiTags("MachineController")
@@ -20,8 +20,8 @@ export class MachineController {
   }
 
   @Post("createMachine")
-  createMachine(@Body() createLineDto: CreateLineDto): Promise<Machine> {
-    return this.machineUseCases.createMachine(createLineDto)
+  createMachine(@Body() createMachineDto: CreateMachineDto): Promise<Machine> {
+    return this.machineUseCases.createMachine(createMachineDto)
   }
 
   @Put("updateMachine")
