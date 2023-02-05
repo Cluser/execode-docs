@@ -22,8 +22,12 @@ export class LineUseCases {
     return this.dataServices.lines.create(line);
   }
 
-  updateLine(lineId: string, updateLineDto: UpdateLineDto): Promise<Line> {
+  updateLine(lineId: number, updateLineDto: UpdateLineDto): Promise<Line> {
     const line = this.lineFactoryService.updateLine(updateLineDto);
     return this.dataServices.lines.update(lineId, line);
+  }
+
+  deleteLineById(id: number): Promise<Line> {
+    return this.dataServices.lines.delete(id);
   }
 }

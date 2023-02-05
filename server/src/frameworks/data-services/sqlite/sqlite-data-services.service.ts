@@ -1,19 +1,26 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { IDataServices, IGenericRepository } from 'src/core/abstracts';
+import { INestApplication, Injectable, OnApplicationBootstrap, OnModuleInit } from '@nestjs/common';
+import { PrismaClient, Line, Machine } from '@prisma/client';
+import { IDataServices } from 'src/core/abstracts';
 import { SqliteGenericRepository } from './sqlite-generic-repository';
-import { Line } from 'src/core/entities';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-
 
 @Injectable()
-export class SqliteDataServices implements IDataServices, OnApplicationBootstrap {
+export class SqliteDataServices extends PrismaClient implements IDataServices, OnModuleInit, OnApplicationBootstrap {
 
   lines: SqliteGenericRepository<Line>;
+  machines: SqliteGenericRepository<Machine>;
 
-  constructor(@InjectRepository(Line) private lineRepository: Repository<Line>) {}
+  async onModuleInit() {
+    await this.$connect();
+  }
 
-  onApplicationBootstrap() {
-    this.lines = new SqliteGenericRepository<Line>(this.lineRepository);
+  async enableShutdownHooks(app: INestApplication) {
+    this.$on('beforeExit', async () => {
+      await app.close();
+    });
+  }
+
+  async onApplicationBootstrap() {
+    this.lines = new SqliteGenericRepository<Line>(this.line);
+    this.machines = new SqliteGenericRepository<Machine>(this.machine);
   }
 }

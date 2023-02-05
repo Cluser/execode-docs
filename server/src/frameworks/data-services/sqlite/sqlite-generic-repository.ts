@@ -1,28 +1,36 @@
 import { IGenericRepository } from 'src/core/abstracts';
-import { Repository } from 'typeorm';
 
 export class SqliteGenericRepository<T> implements IGenericRepository<T> {
-  private _repository: Repository<T>;
+  private _repository: any;
 
-  constructor(repository: Repository<T>) {
-    this._repository = repository;
+  constructor(private repository: any) {
+    this._repository = repository
   }
 
-  getAll(): Promise<T[]> {
-    return this._repository.find()
+  async getAll(): Promise<any> {
+    return this._repository.findMany();
   }
 
-  get(id: any): Promise<T> {
-    return null
+  async get(id: any): Promise<any> {
+    return this._repository.findUnique({
+      where: { id: Number(id) },
+    });
   }
 
-  create(item: T): Promise<T> {
-    return new Promise((resolve, reject) => {
-      resolve(this._repository.create(item))
-    })
+  async create(item: any): Promise<any> {
+    return this._repository.create({data: item})
   }
 
-  update(id: string, item: T) {
-    return null
+  async update(id: number, item: any): Promise<any> {
+    return this._repository.update({
+      where: { id: Number(id) },
+      data: item
+    });
+  }
+
+  async delete(id: number): Promise<any> {
+    return this._repository.delete({
+      where: { id: Number(id) },
+    });
   }
 }
