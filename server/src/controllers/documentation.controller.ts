@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query, UploadedFile } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Documentation } from '@prisma/client';
+import { ApiFile } from 'src/core/decorators/api-file.decorator';
 import { CreateDocumentationDto, UpdateDocumentationDto } from 'src/core/dtos';
 import { DocumentationUseCases } from 'src/use-cases';
 
@@ -41,5 +42,11 @@ export class DocumentationController {
         cause: error
       });
     }
+  }
+
+  @Post('upload')
+  @ApiFile('documentation', ['application/pdf'])
+  uploadDocumentation(@UploadedFile() file: Express.Multer.File) {
+    return file.destination + file.filename
   }
 }
