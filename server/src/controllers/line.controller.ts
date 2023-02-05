@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Put, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Line } from '@prisma/client';
 import { CreateLineDto, UpdateLineDto } from 'src/core/dtos';
-import { Line } from 'src/core/entities/line.entity';
 import { LineUseCases } from 'src/use-cases/line-use-cases/line.use-case';
 
 @ApiTags("LineController")

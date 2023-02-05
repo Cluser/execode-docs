@@ -1,20 +1,23 @@
 import { Injectable } from '@nestjs/common';
+import { Line } from '@prisma/client';
 import { CreateLineDto, UpdateLineDto } from 'src/core/dtos/line.dto';
-import { Line } from 'src/core/entities';
 
 
 @Injectable()
 export class LineFactoryService {
   createNewLine(createLineDto: CreateLineDto) {
-    const newLine = new Line();
-    newLine.name = createLineDto.name;
+    const newLine: Line = {
+      id: undefined,
+      name: createLineDto.name
+    };
 
     return newLine;
   }
 
   updateLine(updateLineDto: UpdateLineDto) {
-    const newLine = new Line();
-    newLine.name = updateLineDto.name;
+    const newLine: Partial<Line> = {
+      name: updateLineDto.name
+    };
 
     return newLine;
   }

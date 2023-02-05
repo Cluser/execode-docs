@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { IDataServices } from 'src/core/abstracts';
 import { CreateLineDto, UpdateLineDto } from 'src/core/dtos';
-import { Line } from 'src/core/entities';
+import { Line } from '@prisma/client';
 import { LineFactoryService } from './line-factory.use-case';
 
 

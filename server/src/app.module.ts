@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { LineController, MachineController } from './controllers';
+import { DocumentationController, LineController, MachineController } from './controllers';
 import { DataServicesModule } from './services/data-services/data-services.module';
-import { LineUseCasesModule } from './use-cases/line-use-cases/line-use-case.module';
-import { MachineUseCasesModule } from './use-cases/machine-use-cases/machine-use-case.module';
+import { LineUseCasesModule, MachineUseCasesModule, DocumentationUseCasesModule } from './use-cases';
 
 @Module({
   imports: [
     DataServicesModule,
     LineUseCasesModule,
-    MachineUseCasesModule
+    MachineUseCasesModule,
+    DocumentationUseCasesModule
   ],
-  controllers: [LineController, MachineController],
+  controllers: [LineController, MachineController, DocumentationController],
   providers: []
 })
 export class AppModule {}
