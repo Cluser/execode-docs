@@ -13,11 +13,14 @@ datasource db {
 model Line {
   id    Int                                 @default(autoincrement()) @id
   name  String                              @unique
+  machines Machine[] 
 }
 
 model Machine {
-  id    Int                                 @default(autoincrement()) @id
-  name  String                              @unique
+  id Int                                    @default(autoincrement()) @id
+  name String                               @unique
+  line Line                                 @relation(fields: [lineId], references: [id])
+  lineId Int   
   documentations Documentation[]            
 }
 
