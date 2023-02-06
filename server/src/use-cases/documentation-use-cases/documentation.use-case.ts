@@ -30,4 +30,8 @@ export class DocumentationUseCases {
   deleteDocumentationById(id: number): Promise<Documentation> {
     return this.dataServices.documentations.delete(id);
   }
+
+  uploadDocumentation(file: Express.Multer.File): string {
+    return file.destination + file.filename;
+  }
 }

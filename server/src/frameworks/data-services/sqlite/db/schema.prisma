@@ -27,6 +27,7 @@ model Machine {
 model Documentation {
   id                                        Int                                  @default(autoincrement()) @id
   name                                      String                               @unique
+  path                                      String                               @unique
   category                                  DocumentationCategory                @relation(fields: [categoryId], references: [id])
   categoryId                                Int       
   machine                                   Machine                              @relation(fields: [machineId], references: [id])

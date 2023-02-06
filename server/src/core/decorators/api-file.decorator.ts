@@ -17,7 +17,7 @@ export function ApiFile(path: string, allowedExtensions: string[]) {
                 cb(null, `uploads/${path}/`)
             },
             filename: function (req, file, cb) {
-                cb(null, Date.now() + Buffer.from(file.originalname, 'latin1').toString('utf8')) 
+                cb(null, Buffer.from(file.originalname.split('.').join(' ' + Date.now() + '.'), 'latin1').toString('utf8'))
             }
         }),
         fileFilter: (req, file, cb) => {

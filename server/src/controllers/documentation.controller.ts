@@ -21,6 +21,7 @@ export class DocumentationController {
   }
 
   @Post("createDocumentation")
+  @ApiFile('documentation', ['application/pdf'])
   createDocumentation(@Body() createDocumentationDto: CreateDocumentationDto): Promise<Documentation> {
     return this.documentationUseCases.createDocumentation(createDocumentationDto)
   }
@@ -44,9 +45,9 @@ export class DocumentationController {
     }
   }
 
-  @Post('upload')
+  @Post('uploadDocumentation')
   @ApiFile('documentation', ['application/pdf'])
-  uploadDocumentation(@UploadedFile() file: Express.Multer.File) {
-    return file.destination + file.filename
+  uploadDocumentation(@UploadedFile() file: Express.Multer.File): string {
+    return this.documentationUseCases.uploadDocumentation(file);
   }
 }

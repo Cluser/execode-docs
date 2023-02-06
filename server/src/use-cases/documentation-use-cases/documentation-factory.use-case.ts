@@ -5,7 +5,7 @@ import { CreateDocumentationDto, UpdateDocumentationDto } from 'src/core/dtos';
 @Injectable()
 export class DocumentationFactoryService {
   createNewDocumentation(createDocumentationDto: CreateDocumentationDto) {
-    const newDocumentation: Documentation = {
+    const newDocumentation: any = {
       id: undefined,
       name: createDocumentationDto.name,
       categoryId: createDocumentationDto.categoryId,
@@ -16,10 +16,10 @@ export class DocumentationFactoryService {
   }
 
   updateDocumentation(updateDocumentationDto: UpdateDocumentationDto) {
-    const updateMachine: Partial<Documentation> = {
+    const updateDocumentation: Partial<Documentation> = {
       name: updateDocumentationDto.name
     };
 
-    return updateMachine;
+    return updateDocumentation;
   }
 }
