@@ -9,8 +9,12 @@ import { DocumentationFactoryService } from './documentation-factory.use-case';
 export class DocumentationUseCases {
   constructor(private dataServices: IDataServices, private documentationFactoryService: DocumentationFactoryService) {}
 
-  getAllDocumentations(): Promise<any> {
-    return this.dataServices.documentations.getAll();
+  getAllDocumentations(): Promise<Documentation[]> {
+    return this.dataServices.documentations.getAll({
+      include: {
+        category: true
+      }
+    });
   }
 
   getDocumentationById(id: any): Promise<Documentation> {

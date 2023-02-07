@@ -11,8 +11,8 @@ datasource db {
 }
 
 model Line {
-  id                                        Int                                 @default(autoincrement()) @id
-  name                                      String                              @unique
+  id                                        Int                                  @default(autoincrement()) @id
+  name                                      String                               @unique
   machines                                  Machine[] 
 }
 
@@ -21,7 +21,8 @@ model Machine {
   name                                      String                               @unique
   line                                      Line                                 @relation(fields: [lineId], references: [id])
   lineId                                    Int   
-  documentations                            Documentation[]            
+  documentations                            Documentation[]          
+  instructions                              Instruction[]  
 }
 
 model Documentation {
@@ -38,4 +39,32 @@ model DocumentationCategory {
   id                                        Int                                  @default(autoincrement()) @id
   name                                      String                               @unique
   documentations                            Documentation[]                        
+}
+
+model Instruction {
+  id                                        Int                                  @default(autoincrement()) @id
+  name                                      String               
+  description                               String 
+  lastModifiedBy                            User[]
+  lastModifiedDate                          DateTime                
+  machine                                   Machine                              @relation(fields: [machineId], references: [id])
+  machineId                                 Int                 
+  steps                                     InstructionStep[]
+}
+
+model InstructionStep {
+  id                                        Int                                  @default(autoincrement()) @id
+  name                                      String                               
+  description                               String
+  imagePath                                 String
+  videoPath                                 String
+  instruction                               Instruction                          @relation(fields: [instructionId], references: [id])
+  instructionId                             Int                           
+}
+
+model User {
+  id                                        Int                                  @default(autoincrement()) @id
+  name                                      String                               
+  surname                                   String   
+  instructions                              Instruction[]                              
 }

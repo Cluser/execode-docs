@@ -7,8 +7,8 @@ export class SqliteGenericRepository<T> implements IGenericRepository<T> {
     this._repository = repository
   }
 
-  async getAll(): Promise<any> {
-    return this._repository.findMany();
+  async getAll(params: object): Promise<any> {
+    return this._repository.findMany(params);
   }
 
   async get(id: any): Promise<any> {
