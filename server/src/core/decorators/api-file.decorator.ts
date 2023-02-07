@@ -17,7 +17,11 @@ export function ApiFile(path: string, allowedExtensions: string[]) {
                 cb(null, `uploads/${path}/`)
             },
             filename: function (req, file, cb) {
-                cb(null, Buffer.from(file.originalname.split('.').join(' ' + Date.now() + '.'), 'latin1').toString('utf8'))
+                var date = new Date();
+                var dateString = date.getUTCFullYear() + ("0" + (date.getUTCMonth()+1)).slice(-2) + ("0" + date.getUTCDate()).slice(-2) +
+                                                         ("0" + date.getUTCHours()).slice(-2) + ("0" + date.getUTCMinutes()).slice(-2) +
+                                                         ("0" + date.getUTCSeconds()).slice(-2);
+                cb(null, Buffer.from(file.originalname.split('.').join(' ' + dateString + '.'), 'latin1').toString('utf8'))
             }
         }),
         fileFilter: (req, file, cb) => {
