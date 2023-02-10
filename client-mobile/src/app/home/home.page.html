@@ -1,11 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-button (click)="startRecording()">Nagrywaj</ion-button>
+  <ion-button (click)="startRecording()">Nagraj film i wyślij na serwer</ion-button>
+  <ion-button (click)="getLines()">Pobierz linie</ion-button>
+  <ion-button (click)="getMachines()">Pobierz maszyny</ion-button>
+  <ion-button (click)="getDocumentations()">Pobierz dokumentacje</ion-button>
 </ion-content>
+
+<ion-list>
+  <ion-item *ngFor="let line of lines">
+    <ion-label>{{line.name}}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-list>
+  <ion-item *ngFor="let machine of machines">
+    <ion-label>{{machine.name}}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-list>
+  <ion-item *ngFor="let documentation of documentations">
+    <ion-label>{{documentation.name}} {{documentation.category.name}}</ion-label>
+  </ion-item>
+</ion-list>
+
+
+
+
+
+

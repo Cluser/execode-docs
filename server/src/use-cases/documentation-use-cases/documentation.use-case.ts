@@ -35,7 +35,8 @@ export class DocumentationUseCases {
     return this.dataServices.documentations.delete(id);
   }
 
-  uploadDocumentation(file: Express.Multer.File): string {
-    return file.destination + file.filename;
+  uploadDocumentation(file: Express.Multer.File): any {
+    // return file.destination + file.filename;
+    return { status: "Uploaded" }
   }
 }

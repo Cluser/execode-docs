@@ -25,9 +25,9 @@ export function ApiFile(path: string, allowedExtensions: string[]) {
             }
         }),
         fileFilter: (req, file, cb) => {
-            if (!allowedExtensions.includes(file.mimetype)) {
-              return cb(new Error('file is not allowed'), null)
-            }
+            // if (!allowedExtensions.includes(file.mimetype)) {
+            //   return cb(new Error('file is not allowed'), null)
+            // }
         
             cb(null, true)
           }
